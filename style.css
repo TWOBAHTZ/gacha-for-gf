@@ -1,0 +1,337 @@
+:root {
+  --pink: #f8c8d3;
+  --mint: #b5ead7;
+  --cream: #f7ede2;
+  --dark-pink: #e096a9;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--cream);
+  font-family: "Chakra Petch", sans-serif;
+  color: #555;
+}
+
+.container {
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+}
+
+h1 {
+  font-size: clamp(1.5rem, 8vw, 2.5rem);
+  color: var(--dark-pink);
+  margin-bottom: 1.5rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  word-break: keep-all;
+  animation:
+    float 3s ease-in-out infinite,
+    glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow {
+  from {
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 15px var(--pink);
+  }
+  to {
+    text-shadow:
+      0 0 10px #fff,
+      0 0 20px var(--pink),
+      0 0 30px var(--pink);
+  }
+}
+
+.gacha-box {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 350px; /* จองพื้นที่ไว้ให้รูปภาพ */
+}
+
+#gacha-img {
+  width: 100%;
+  max-width: 400px;
+  height: 300px; /* กำหนดความสูงให้เท่ากันทุกรูป */
+  object-fit: contain; /* ให้รูปอยู่ภายในขอบเขตโดยไม่เสียสัดส่วน */
+  transition: transform 0.3s ease;
+}
+
+/* แอนิเมชันตอนเขย่าตู้ */
+.shake {
+  animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+}
+
+.btn-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  min-height: 100px;
+}
+
+button {
+  border: none;
+  padding: 12px 25px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  white-space: nowrap; /* ป้องกันตัวอักษรตัดบรรทัด */
+  transition: all 0.2s ease; /* ใช้ all เพื่อรองรับการเปลี่ยน padding/font-size */
+}
+
+.btn-main {
+  background-color: var(--pink);
+  color: white;
+  font-size: 1.5rem;
+  padding: 15px 40px;
+  box-shadow: 0 6px 20px rgba(248, 200, 211, 0.5);
+}
+
+.btn-sub {
+  background-color: var(--mint);
+  color: #444;
+  font-size: 1.2rem;
+  padding: 12px 30px;
+  transition: all 0.2s ease;
+}
+
+.love-prompt {
+  margin-top: 20px;
+  width: 100%;
+  text-align: center;
+  color: var(--dark-pink);
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  opacity: 0;
+  transform: translateY(10px); /* อนิเมชั่นตอนเริ่ม */
+  pointer-events: none;
+  min-height: 1.5em;
+}
+
+.love-prompt.show {
+  opacity: 1;
+  transform: translateY(0); /* อนิเมชั่นตอนโชว์ */
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+button:active {
+  transform: scale(0.95);
+}
+
+/* Modal Styling */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  justify-content: center; /* จัดกลางแนวนอน */
+  align-items: center; /* จัดกลางแนวตั้ง */
+}
+
+.modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 25px;
+  width: 85%;
+  max-width: 350px;
+  max-height: 80vh; /* ป้องกันกล่องยาวเกินจอ */
+  overflow-y: auto; /* ให้เลื่อนขึ้นลงได้ถ้าของรางวัลเยอะ */
+  text-align: center;
+  position: relative;
+  border: 5px solid var(--pink);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.close,
+.close-detail {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--dark-pink);
+  line-height: 1;
+}
+
+.loot-list {
+  text-align: left;
+  list-style: none;
+  padding: 0;
+}
+
+.loot-list li {
+  padding: 8px 0;
+  border-bottom: 1px dashed #eee;
+}
+
+.screenshot-reminder {
+  font-size: 0.9rem;
+  color: var(--dark-pink);
+  margin-top: 15px;
+  font-weight: 500;
+  border-top: 1px dashed var(--pink);
+  padding-top: 15px;
+}
+
+#bg-decorations {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.bg-item {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  animation: bgFade var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes bgFade {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.8) rotate(var(--rot));
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(1) rotate(var(--rot));
+  }
+}
+
+/* Music Button */
+.music-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  z-index: 1000;
+  cursor: pointer;
+  border: 2px solid var(--pink);
+  transition: all 0.3s ease;
+}
+
+.music-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.music-btn.playing {
+  background-color: var(--pink);
+  color: white;
+}
+
+/* Responsive Styles for Mobile */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.6rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .gacha-box {
+    min-height: 250px;
+    margin-bottom: 1rem;
+  }
+
+  #gacha-img {
+    max-width: 90vw;
+    height: 220px;
+  }
+
+  .btn-group {
+    gap: 10px;
+    min-height: 80px;
+  }
+
+  .btn-main {
+    font-size: 1.1rem;
+    padding: 10px 25px;
+    min-width: 120px;
+  }
+
+  .btn-sub {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+
+  .love-prompt {
+    font-size: 0.95rem;
+    margin-top: 15px;
+    padding: 0 10px;
+  }
+
+  .music-btn {
+    bottom: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}

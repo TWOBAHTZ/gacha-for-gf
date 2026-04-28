@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gacha for My Girl</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="bg-decorations"></div>
+    <div class="container">
+        <h1>หมุนลุ้นดวงประจำวันสำหรับนุ้งแฟน 💖</h1>
+        
+        <div class="gacha-box">
+            <img src="gif/static.png" alt="Gacha Machine" id="gacha-img">
+        </div>
+
+        <div class="btn-group">
+            <button id="spin-btn" class="btn-main">หมุนเลย!</button>
+            <button id="detail-btn" class="btn-sub">ดูรายละเอียด</button>
+        </div>
+        <div id="love-message" class="love-prompt">
+            เดี๋ยวสิ อย่าพึ่งรีบหมุน ไปบอกรักแฟนก่อนได้มั้ยครับ 💖
+        </div>
+    </div>
+
+    <div id="result-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>ยินดีด้วยจ้าา!</h2>
+            <div id="reward-display"></div>
+            <p id="reward-text"></p>
+            <p class="screenshot-reminder">ได้อะไรก็แคปไปบอกเค้าด้วยหล่ะ! 🥰</p>
+        </div>
+    </div>
+
+    <div id="detail-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-detail">&times;</span>
+            <h3>รายการของรางวัล (Loot Table)</h3>
+            <ul class="loot-list">
+                <li>💸 เงินรางวัล 10 บาท</li>
+                <li>💸 เงินรางวัล 50 บาท</li>
+                <li>💰 เงินรางวัล 100 บาท</li>
+                <li>💰 เงินรางวัล 200 บาท</li>
+                <li>💎 เงินรางวัล 300 บาท</li>
+                <li>👑 สิทธิ์สั่งอะไรก็ได้ 1 ครั้ง</li>
+                <li>🥓 พาไปกินหมูกระทะ</li>
+                <li>💆‍♂️ นวดคอบ่าไหล่</li>
+                <li style="border:none; color:var(--dark-pink); font-size:0.8rem; text-align:center; margin-top:10px;">* ทุกรางวัลมีโอกาสสุ่มได้เท่ากัน (12.5%)</li>
+            </ul>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="music/beabadoobee - Glue Song (Lyrics).mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="spin-sound">
+        <source src="soundeffects/spinner.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="clatter-sound">
+        <source src="soundeffects/clatter.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="music-toggle" class="music-btn">
+        <span id="music-icon">🎵</span>
+    </button>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
