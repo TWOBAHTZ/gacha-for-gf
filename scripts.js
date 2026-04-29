@@ -79,8 +79,10 @@ gachaImg.src = staticImg;
 
 const titleText = document.querySelector("h1");
 const loveMessage = document.getElementById("love-message");
+const slipMessage = document.getElementById("slip-message");
 let gameStep = "start";
 let noCount = 0;
+let slipTimeout;
 
 function moveButton(btn) {
   const x = Math.random() * (window.innerWidth - btn.offsetWidth);
@@ -108,6 +110,8 @@ function resetButtons() {
 }
 
 spinBtn.onclick = function () {
+  clearTimeout(slipTimeout);
+  slipMessage.classList.remove("show");
   // ด่านที่ 1: บอกรัก
   if (gameStep === "start") {
     loveMessage.classList.add("show");
@@ -136,9 +140,9 @@ spinBtn.onclick = function () {
 
   // ด่านที่ 2: แฟนน่ารักมั้ย?
   if (gameStep === "is_cute_step") {
-    titleText.innerText = "แฟนน่ารักมั้ย? 💖";
-    spinBtn.innerText = "น่ารัก";
-    detailBtn.innerText = "ไม่น่ารัก";
+    titleText.innerText = "รักเค้ามากมั้ย? 💖";
+    spinBtn.innerText = "รัก";
+    detailBtn.innerText = "ไม่รัก";
     detailBtn.style.display = "block"; // คืนค่าปุ่มให้กลับมาโชว์
     gachaImg.src = happyGifs[2];
     detailBtn.onclick = handleNoPath;
@@ -147,9 +151,10 @@ spinBtn.onclick = function () {
   }
 
   if (gameStep === "how_cute_step") {
-    titleText.innerText = "น่ารักแค่ไหน? 🥰";
-    spinBtn.innerText = "น่ารักมากก";
-    detailBtn.style.display = "none";
+    titleText.innerText = "รักแค่ไหนนนน? 🥰";
+    spinBtn.innerText = "รักที่สุดด";
+    detailBtn.innerText = "ไม่รักแล้ว";
+    detailBtn.style.display = "block";
     gachaImg.src = happyGifs[0];
     gameStep = "really_step";
     return;
@@ -158,13 +163,15 @@ spinBtn.onclick = function () {
   if (gameStep === "really_step") {
     titleText.innerText = "จริงหรอ? 😳";
     spinBtn.innerText = "จริงงง";
+    detailBtn.innerText = "ล้อเล่น ไม่รักแล้ว";
+    detailBtn.style.display = "block";
     gachaImg.src = happyGifs[1];
     gameStep = "wish_luck_step";
     return;
   }
 
   if (gameStep === "wish_luck_step") {
-    titleText.innerText = "ขอให้โชคดีนะแฟนนนนน 🥰";
+    titleText.innerText = "งั้นก็หมุนเลย!! ขอให้โชคดีนะแฟนนนนน 🥰";
     spinBtn.innerText = "หมุนเลย!";
     gachaImg.src = happyGifs[2];
     resetButtons();
@@ -183,6 +190,21 @@ spinBtn.onclick = function () {
 
 function handleNoPath() {
   noCount++;
+  
+  if (noCount === 1) {
+    slipMessage.innerText = "อ้าวว.. ทำไมอ่ะ 😭";
+  } else if (noCount === 2) {
+    slipMessage.innerText = "สงสัยมือลื่นน.. แหละ 🤭";
+  } else {
+    slipMessage.innerText = "ปุ่มรักอยู่ฝั่งซ้ายนะ กดผิดหรือเปล่าา.. 🤨";
+  }
+
+  slipMessage.classList.add("show");
+
+  clearTimeout(slipTimeout);
+  slipTimeout = setTimeout(() => {
+    slipMessage.classList.remove("show");
+  }, 3000);
 
   if (noCount <= sadGifs.length) {
     gachaImg.src = sadGifs[noCount - 1];
